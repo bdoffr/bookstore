@@ -38,4 +38,4 @@ def index(request):
         'database_hot': database_hot,
     }
     # 使用模板
-    return render(request, 'books/index.html', context)from django.shortcuts import render
+    return render(request, 'books/index.html', context)
