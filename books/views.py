@@ -39,3 +39,15 @@ def index(request):
     }
     # 使用模板
     return render(request, 'books/index.html', context)
+
+def detail(request,books_id):
+    books = Books.objects.get_books_by_id(books_id=books_id)
+    if books is None:
+        return redirect(reverse('books:index'))
+    books_li = Books.object.get_books_by_type(type_id=books.type_id,limit=2,sort='new')
+    type_title = BOOKS_TYPE[books.type_id]
+    context = {'books' : books,
+                'book_li' : books_li,
+                'type_title' : type_title
+                }
+    return render(request,'books/detail.html',context)
