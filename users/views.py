@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import JsonResponse
-from users.models import Passport
+from users.models import Passport, Address
 import re
+from utils.decorators import login_required
 
 def register_handle(request):
     '''进行用户注册处理'''
@@ -109,3 +110,31 @@ def logout(request):
     request.session.flush()
     # 跳转到首页
     return redirect(reverse('books:index'))
+
+
+@login_required
+def user(request):
+    passport_id = request.session.get('passport_id')
+    addr = Address.objects.get_default_address(passport_id=passport_id)
+
+    books_li = []
+    context = {
+        'addr':addr,
+        'page':'user',
+        'books_li':books_li
+}
+    return render(request,'users/user_center_info.html',context)
+
+
+from rest_framework import mixins
+from rest_framework import viewsets
+from users.serializers import UserProfileSerializer
+
+
+class UserProfileViewSet(viewsets.GenericViewSet,
+                        mixins.CreateModelMixin,
+                        mixins.RetrieveModelMixin,
+                        mixins.UpdateModelMixin
+                        ):
+    queryset = Passport.objects.all()
+    serializer_class = UserProfileSerializer

@@ -4,9 +4,8 @@
 {% block header_con %}{% endblock header_con %}
 {% block search_bar %}{% endblock search_bar %}
 {% block body %}
-<!--{% verbatim %}-->
     <div class="login_top clearfix">
-        <a href="#" class="login_logo"><img src="{% static "images/logo.png" %}" style="width: 160px; height: 53px;"></a>   
+        <a href="#" class="login_logo"><img src="{% static 'images/logo.png' %}" style="width: 160px; height: 53px;"></a>   
     </div>
     <div class="login_form_bg" id="app">
         <div class="login_form_wrap clearfix">
@@ -32,7 +31,6 @@
             </div>
         </div>
     </div>
-<!--{% endverbatim %}-->
 {% endblock body %}
 {% block bottom %}
 <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
@@ -68,3 +66,4 @@ var app = new Vue({
 })
 </script>
 {% endblock bottom %}
+{% block cart_count %}{% endblock cart_count %}

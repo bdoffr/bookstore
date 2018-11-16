@@ -37,7 +37,7 @@
                 {% endif %}
                 <div class="user_link fl">
                     <span>|</span>
-                    <a href="#">用户中心</a>
+                    <a href="{% url 'users:user' %}">用户中心</a>
                     <span>|</span>
                     <a href="#">我的购物车</a>
                     <span>|</span>
@@ -81,5 +81,14 @@
     {% block bottom %}{% endblock bottom %}
     {# 网页底部引入文件块 #}
     {% block bottomfiles %}{% endblock bottomfiles %}
+    {# 获取用户购物车中商品的数目 #}
+    {% block cart_count %}
+        <script>
+            $.get('/cart/count/', function (data) {
+                // {'res':商品的总数}
+                $('#show_count').html(data.res)
+            })
+        </script>
+    {% endblock cart_count %}
 </body>
 </html>
